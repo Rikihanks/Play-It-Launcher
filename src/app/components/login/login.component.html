@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body" style="color: whitesmoke; text-align: center; background-color: #2f2c49;">
+          <div class="container">
+            <div class="row h-100" >
+              <div class="col-md-12" style="text-align: center;">
+                <h2>Login</h2>
+              </div>
+            </div>
+            <div class="row h-100">
+              <div class="col-md-12">
+                  <label for="email">Email</label>
+                  <br>
+                  <input type="email" [(ngModel)]="email" id="loginEmail" class="basicInput">
+              </div>
+            </div>
+              <div class="row h-100">
+                <div class="col-md-12">
+                    <label for="password">Password</label>
+                    <br>
+                    <input type="password" [(ngModel)]="password" id="loginPassword" class="basicInput">
+                </div>
+              </div>
+              <div class="row h-100" style="margin-top: 10px;">
+                <div class="col-md-12">
+                    <small *ngIf="invalidFields" class="errorMsg">Todos los campos son obligatorios</small>
+                    <small *ngIf="wrongPassword" class="errorMsg">Datos inválidos</small>
+                    <br>
+                    <button class="btn btn-primary" (click)="login()">Entrar</button>
+                    <br>
+                </div>
+              </div>
+              <div class="row h-100">
+                <div class="col-md-12">
+                  <br>
+                  <a href="" class="passwordLink">¿Olvidaste la contraseña?</a>
+                </div>
+               
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

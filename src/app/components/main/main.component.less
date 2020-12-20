@@ -1,0 +1,55 @@
+@import "../../app.component.less";
+
+.roundedPfImg {
+    border-radius: 50%;
+    height: 85px;
+    padding: 6px;
+    border: 2px solid @complementaryColor;
+}
+
+.noDragabble {
+    -webkit-app-region: no-drag;
+}
+
+.topBar {
+    display: flex; justify-content: flex-end; padding: 0;
+}
+
+
+
+.topBarIcon {
+    padding-right: 18px;
+    padding-left: 18px;
+    line-height: 2;
+    &:hover {
+        background-color: @secondaryColor ;
+    }
+    &.close {
+        &:hover {
+            background-color: #803131;
+        }
+    }
+}
+
+.userInfoDiv {
+    margin: auto;
+}
+
+.btn-registro {
+    background-color: transparent;
+    border: none;
+    color: #2d9c87;
+    &:hover {
+        color: #33b19a;
+    }
+}
+
+.btnLogout {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: transparent;
+    color: whitesmoke;
+    &:hover {
+        border: 1px solid whitesmoke;
+    }
+}

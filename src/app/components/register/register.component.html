@@ -1,0 +1,56 @@
+<!-- Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body" style="color: whitesmoke; text-align: center; background-color: #2f2c49;">
+          <div class="container">
+              <div class="row h-100">
+                <div class="col-md-12">
+                    <label for="username">Nombre público</label>
+                    <br>
+                    <input type="text" [(ngModel)]="userName" id="username" class="basicInput">
+                </div>
+              </div>
+              <div class="row h-100">
+                <div class="col-md-12">
+                    <label for="password">Password</label>
+                    <br>
+                    <small>Debe contener letras y números</small>
+                    <br>
+                    <input type="password" [(ngModel)]="password" id="password" class="basicInput">
+                </div>
+              </div>
+              <div class="row h-100">
+                <div class="col-md-12">
+                    <label for="email">Email</label>
+                    <br>
+                    <input type="email" [(ngModel)]="email" id="email" class="basicInput">
+                </div>
+              </div>
+              <div class="row h-100">
+                <div class="col-md-12">
+                    <label for="profilepic">Avatar</label>
+                    <br>
+                    <span *ngFor="let image of imgs">
+                        <img [src]="image" (click)="avatarUrl = image" alt="" class="avatarImg" [id]="image" tabindex="0" style="height: 50px;">
+                    </span>
+                </div>
+              </div>
+              <div class="row h-100" style="margin-top: 10px;">
+                
+                <br>
+                <small *ngIf="invalidFields" class="errorMsg">Todos los campos son obligatorios</small>
+                <small *ngIf="emailAlredyRegistered" class="errorMsg">Este Email ya está registrado</small>
+
+                <div class="col-md-12">
+                    <button class="btn btn-primary" (click)="register()">Registrarse</button>
+                    <br>
+                    <a (click)="cancel()" class="cancelBtn">Cancelar</a>
+                </div>
+                
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

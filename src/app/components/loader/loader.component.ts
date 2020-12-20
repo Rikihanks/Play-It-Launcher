@@ -1,0 +1,20 @@
+import { Component, OnInit } from '@angular/core';
+import { LoaderService } from 'src/app/services/loader.service';
+
+@Component({
+  selector: 'app-loader',
+  templateUrl: './loader.component.html',
+  styleUrls: ['./loader.component.less']
+})
+export class LoaderComponent implements OnInit {
+
+  constructor(public loader: LoaderService) { }
+
+  ngOnInit(): void {
+    this.loader.loading$.subscribe(lo => {
+      console.log(lo);
+      
+    })
+  }
+
+}

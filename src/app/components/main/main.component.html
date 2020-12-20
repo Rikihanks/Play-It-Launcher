@@ -1,0 +1,107 @@
+<div class="container-fluid h-100" style="background-color: #26223b;">
+    <!--top bar-->
+    <div class="row h-5 border border-light" style="background-color: #2f2c49;">
+        <div class="col-md-12" class="topBar">
+            <span class="topBarIcon noDragabble"  (click)="ipc.sendMinimize()"><i class="fas fa-window-minimize"></i></span>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <span class="topBarIcon close noDragabble" (click)="ipc.sendClose()"><i class="fas fa-window-close" style="line-height: 2.5;"></i></span>
+        </div>
+    </div>
+    <!--rest of the content-->
+    <div class="row h-95">
+        
+        <!--game icons-->
+        <div class="col-md-3 h-100  border border-light">
+            <div class="row h-10 border border-light">
+                <div class="col">
+                    <span>launcher logo</span>
+                </div>
+            </div>
+            <div class="row h-30 border border-light">
+                <div class="col p-10"  class="userInfoDiv">
+                    <div *ngIf="auth.user$ | async; then authenticated else guest">
+                        <!-- template will replace this div -->
+                    </div>
+
+                    <!-- User logged in -->
+                    <ng-template #authenticated>
+                        <div *ngIf="auth.user$ | async as user" style="text-align: center;">
+                            <img [src]="user.photoURL" class="roundedPfImg">
+                            <h3>{{ user.displayName }}</h3>
+                            <p>{{ user.email }}</p>
+                        </div>
+                    </ng-template>
+
+                     <!-- User NOT logged in -->
+                     <ng-template #guest>
+                        <div style="text-align: center;">
+                            <h3>INVITADO</h3>
+                            <span>Para guardar tu configuración y juegos</span>
+                            <br>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Regístrate</button>
+                            <br>
+                            <span>o</span>
+                            <br>
+                            <button class="btn btn-registro" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Inicia Sesión 
+                            </button>
+                        </div>
+
+                    </ng-template>
+                </div>
+            </div>
+            <div class="row h-30 border border-light">
+                <div class="col">
+                    <span>
+                        recently played games
+                    </span>
+                </div>
+            </div>
+            <div class="row h-30 border border-light" >
+                <div class="col" style="justify-content: space-between;
+                display: flex;
+                flex-direction: column;
+                padding-bottom: 10px;">
+                    <span>
+                        pending
+                    </span>
+                    <br>
+                    
+                    <div *ngIf="canShowLogoutButton()" style="text-align: center;">
+                        <button (click)="auth.signOut()" class="btnLogout">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col h-100 border border-light" style="background-color: #2f2c49;">
+            <div class="row h-10 border border-light">
+                <div class="col">
+                    <span>pending variable maybe delete</span>
+                </div>
+            </div>
+            <div class="row h-10 border border-light">
+                <div class="col">
+                    <span>utility row, search bar, add new game, filters etc</span>
+                </div>
+            </div>
+
+            <div class="row h-80 border border-light">
+                <div class="col">
+                    <span>games row</span>
+                   
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+    
+
+<app-register></app-register>
+ 
+<app-login></app-login>     
+  
+
+</div>
