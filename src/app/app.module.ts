@@ -15,6 +15,7 @@ import { LoaderService } from './services/loader.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loaderInterceptor';
 import { LoginComponent } from './components/login/login.component';
+import { ModalParentComponent } from './components/modal-parent/modal-parent.component';
 
 
 
@@ -24,7 +25,8 @@ import { LoginComponent } from './components/login/login.component';
     MainComponent,
     RegisterComponent,
     LoaderComponent,
-    LoginComponent
+    LoginComponent,
+    ModalParentComponent
   ],
   imports: [
     BrowserModule,

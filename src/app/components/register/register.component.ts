@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { ModalParentComponent } from '../modal-parent/modal-parent.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.less']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends ModalParentComponent implements OnInit {
 
   invalidFields = false;
   emailAlredyRegistered = false;
   userName; email; password; avatarUrl;
-  modal;
 
   imgs = ["https://i.ibb.co/b7NCfkD/001-scientist.png",
   "https://i.ibb.co/PcGsC4h/002-werewolf.png",
@@ -67,7 +67,9 @@ export class RegisterComponent implements OnInit {
   ]
 
   constructor(public auth: AuthService, 
-              private loader: LoaderService,) { }
+              private loader: LoaderService,) {
+    super();
+  }
 
   ngOnInit(): void {
   }
@@ -84,7 +86,7 @@ export class RegisterComponent implements OnInit {
 
     this.auth.registerUser(this.email, this.password).then((user) => {
       this.auth.updateUserData(user, this.userName, this.avatarUrl);
-      this.getSelfReference().hide();
+      super.getSelfReference("registerModal").hide();
     })
     .catch((error) => {
       var errorCode = error.code;
@@ -112,7 +114,7 @@ export class RegisterComponent implements OnInit {
   cancel() {
 
     this.clearFields();
-    this.getSelfReference().hide();
+    super.getSelfReference("registerModal").hide();
   }
 
   clearFields() {
@@ -126,13 +128,6 @@ export class RegisterComponent implements OnInit {
   resetErrors() {
     this.invalidFields = false;
     this.emailAlredyRegistered = false;
-  }
-
-  getSelfReference(): any {
-    let modalref = document.getElementById('registerModal') as any;
-    //@ts-ignore
-    let modal = bootstrap.Modal.getInstance(modalref)
-    return modal;
   }
 
 }

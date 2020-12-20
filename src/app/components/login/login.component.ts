@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { ModalParentComponent } from '../modal-parent/modal-parent.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends ModalParentComponent implements OnInit {
 
   email; password;
   invalidFields: boolean;
   wrongPassword: boolean;
 
-  constructor(public auth: AuthService, private loader: LoaderService) { }
+  constructor(public auth: AuthService, private loader: LoaderService) {
+    super();
+  }
 
   ngOnInit(): void {
   }
@@ -31,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.loader.startLoader();
 
     this.auth.loginUser(this.email, this.password)
-    .then(() => {this.getSelfReference().hide();})
+    .then(() => {super.getSelfReference("loginModal").hide();})
     .catch(err => {
       var errorCode = err.code;
       if(errorCode == "auth/wrong-password" || errorCode == "auth/invalid-email") {
@@ -47,13 +50,6 @@ export class LoginComponent implements OnInit {
   validateFields() {
     let fields = [this.email, this.password]
     fields.forEach(field => {if(field == null || field == '') this.invalidFields = true})
-  }
-
-  getSelfReference(): any {
-    let modalref = document.getElementById('loginModal') as any;
-    //@ts-ignore
-    let modal = bootstrap.Modal.getInstance(modalref)
-    return modal;
   }
 
   clearErrors() {
