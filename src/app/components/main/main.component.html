@@ -84,14 +84,10 @@
                 <div class="col-md-8" style="margin: auto 0;">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text" style="height: 38px;
-                          border: none;
-                          color: whitesmoke;
-                          background-color: #26223b;
-                          border-radius: 0;"><i class="fa fa-search" aria-hidden="true"></i></span>
+                          <span class="input-group-text inputIcon"><i class="fa fa-search" aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" style="background-color: #26223b; color: whitesmoke;
-                        border: none;" class="form-control" placeholder="Búsqueda...">
+                        <input type="text" class="form-control inputText" placeholder="Búsqueda...">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newGameModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </div>
                 </div>
                 <div class="col-md-2">
@@ -115,6 +111,7 @@
 <app-register></app-register>
  
 <app-login></app-login>     
-  
+
+<app-new-game></app-new-game>
 
 </div>

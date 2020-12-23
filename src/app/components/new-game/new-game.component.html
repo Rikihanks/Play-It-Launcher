@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div class="modal fade" id="newGameModal" tabindex="-1" aria-labelledby="newGameModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-body myModalBody">
+        <div class="container-fluid">
+          <div class="row h-100">
+            <div class="col-md-12 modalHeader" style="text-align: center;">
+              <h2>Añadir juego a tu biblioteca</h2>
+            </div>
+          </div>
+          <div class="row h-100 searchRow">
+            <div class="col-md-3">
+              <input type="text" class="form-control inputText" [(ngModel)]="gameName" name="gameName" id="gameName"
+                placeholder="Ex: World of warcraft">
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-primary" (click)="findGame(gameName)">&nbsp; Buscar &nbsp;</button>
+            </div>
+          </div>
+          <div class="row h-100">
+            <div class="col-md-12 gamesCol">
+              <div *ngFor="let game of games">
+                <app-game-card-search [game]="game" (click)="selectGame(game)"></app-game-card-search>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="selectedGame" class="row h-100">
+            <div class="col-md-12 gamesCol">
+              <input type="file" #selectFile (change)="change($e)" style="display:none" name="gamepath" id="gamepath">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend" (click)="openFilePicker()">
+                  <span class="input-group-text inputIcon">
+                    <i class="fa fa-folder-open" aria-hidden="true"></i>
+                    &nbsp;Selecciona la ruta del .exe del juego
+                  </span>
+                </div>
+                <input type="text" [(ngModel)]="filePath"
+                  placeholder="Ex: C:\Riot Games\VALORANT\live\VALORANT.exe" class="form-control inputText" readonly="true">
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

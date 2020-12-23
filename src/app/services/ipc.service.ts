@@ -24,4 +24,8 @@ export class IpcService {
   sendMinimize() {
     this.ipcRenderer.send('minimize');
   }
+
+  sendOpenFile(path: string) {
+    this.ipcRenderer.send('openFile', path);
+  }
 }

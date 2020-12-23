@@ -1,0 +1,33 @@
+@import "../../app.component.less";
+
+.searchGameCard {
+    width: 12rem; 
+    margin: 20px; 
+    border: none;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    user-select: none;
+    &:hover {
+        box-shadow: 0 0 6px 3px #ffffff;
+        cursor: pointer;
+    }
+
+    .cardImg {
+        height: 240px
+    }
+
+    .gameNameDiv {
+        margin: auto;  white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+}
+
+.myCardBody {
+    background-color: @secondaryColor;
+    width: 100%;
+    padding: 10px 10px;
+    height: 45px;
+    align-self: center;
+    display: flex;
+    align-items: center;
+}

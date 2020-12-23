@@ -16,8 +16,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loaderInterceptor';
 import { LoginComponent } from './components/login/login.component';
 import { ModalParentComponent } from './components/modal-parent/modal-parent.component';
+import { NewGameComponent } from './components/new-game/new-game.component';
+import { GameCardSearchComponent } from './components/game-card-search/game-card-search.component';
 
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,10 +29,13 @@ import { ModalParentComponent } from './components/modal-parent/modal-parent.com
     RegisterComponent,
     LoaderComponent,
     LoginComponent,
-    ModalParentComponent
+    ModalParentComponent,
+    NewGameComponent,
+    GameCardSearchComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,

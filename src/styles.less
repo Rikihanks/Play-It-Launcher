@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "/src/app/app.component.less";
 
 html,body{
     height:100%;
@@ -9,6 +10,24 @@ html,body{
     font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
     border-radius: 15px;
+}
+
+.inputIcon {
+    height: 38px;
+    border: none;
+    cursor: pointer;
+    color: whitesmoke;
+    background-color: #26223b;
+    border-radius: 0;
+    &:hover {
+        background-color: @hoverColor;
+    }
+}
+
+.inputText {
+    background-color: #26223b !important; 
+    color: whitesmoke;
+    border: none;
 }
 
 .h-40 {
