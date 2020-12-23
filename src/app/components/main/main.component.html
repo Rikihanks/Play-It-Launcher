@@ -25,8 +25,8 @@
 
                     <!-- User logged in -->
                     <ng-template #authenticated>
-                        <div *ngIf="auth.user$ | async as user" style="text-align: center;">
-                            <img [src]="user.photoURL" class="roundedPfImg">
+                        <div  *ngIf="auth.user$ | async as user" style="text-align: center;" class="lmao">
+                            <img [@inOutAnimation] [src]="user.photoURL" class="roundedPfImg">
                             <h3>{{ user.displayName }}</h3>
                             <p>{{ user.email }}</p>
                         </div>
