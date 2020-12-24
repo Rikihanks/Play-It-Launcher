@@ -21,6 +21,7 @@ import { GameCardSearchComponent } from './components/game-card-search/game-card
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GameCardMainComponent } from './components/game-card-main/game-card-main.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     ModalParentComponent,
     NewGameComponent,
-    GameCardSearchComponent
+    GameCardSearchComponent,
+    GameCardMainComponent
   ],
   imports: [
     BrowserModule,

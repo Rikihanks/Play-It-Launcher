@@ -21,3 +21,25 @@ export const ProfilePicAnim = trigger(
       )
     ]
   )
+
+  export const GamePicAnim = trigger(
+    'inOutAnimation', 
+    [
+      transition(
+        ':enter', 
+        [
+          style({  opacity: 0, offset: 0 }),
+          animate('1.5s ease-in', 
+                  style({ opacity: 1 , offset: 0.1}))
+        ]
+      ),
+      transition(
+        ':leave', 
+        [
+          style({ height: 300, opacity: 1 }),
+          animate('1s ease-in', 
+                  style({ height: 0, opacity: 0 }))
+        ]
+      )
+    ]
+  )

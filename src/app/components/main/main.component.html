@@ -11,7 +11,7 @@
     <div class="row h-95">
         
         <!--game icons-->
-        <div class="col-md-3 h-100  border border-light">
+        <div class="col-md-2 h-100  border border-light">
             <div class="row h-10 border border-light">
                 <div class="col">
                     <span>launcher logo</span>
@@ -87,7 +87,7 @@
                           <span class="input-group-text inputIcon"><i class="fa fa-search" aria-hidden="true"></i></span>
                         </div>
                         <input type="text" class="form-control inputText" placeholder="Búsqueda...">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newGameModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        <button class="btn btn-jugar" data-bs-toggle="modal" data-bs-target="#newGameModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </div>
                 </div>
                 <div class="col-md-2">
@@ -95,11 +95,17 @@
                 </div>
             </div>
 
-            <div class="row h-80 border border-light">
-                <div class="col">
-                    <span>games row</span>
-                     <br>
-                     <span>{{games | json}}</span>
+            <div class="row h-80 border border-light" style=" overflow-y: auto;
+            overflow-x: hidden;">
+                <div class="col" style="
+                padding: 0;
+                    display: flex;
+                    flex-flow: wrap;
+                    justify-content: flex-start;;
+                ">
+                     <div *ngFor="let game of games"  >
+                         <app-game-card-main [game]="game"></app-game-card-main>
+                     </div>
                 </div>
             </div>
 

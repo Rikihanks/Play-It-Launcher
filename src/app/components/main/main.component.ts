@@ -18,7 +18,7 @@ import { GamesService } from 'src/app/services/games.service';
 })
 export class MainComponent implements OnInit, OnDestroy {
 
- games: Game[];
+  games: Game[];
   private user: User;
   private subscription: Subscription;
 

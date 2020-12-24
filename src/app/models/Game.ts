@@ -3,6 +3,7 @@ export class Game {
     cover: number;
     name: string;
     horizontalCoverUrl: string;
+    summary: string;
     verticalCoverUrl?: string;
     gamePath?: string;
     addedPrograms?: string [];

@@ -1,0 +1,20 @@
+<div [@inOutAnimation] *ngIf="game" class="card searchGameCard">
+    <div class="centered">
+        <span style="font-size: x-large;"> <b> {{game.name | uppercase}}</b>
+        <br>
+    </span>
+    <span class="notemuestro" >
+        <span>{{game.summary | slice:0:122}} ...</span>
+        <br>
+        <br>
+
+        <button class="btn btn-jugar">&nbsp;Jugar &nbsp;</button>
+        <span>&nbsp;&nbsp;</span>
+        <button class="btn btn-jugar">&nbsp;&nbsp;&nbsp;Info&nbsp;&nbsp;&nbsp;</button>
+    </span>
+    </div>
+    <img *ngIf="game.horizontalCoverUrl" class="card-img-top cardImg" draggable="false" [src]="game.horizontalCoverUrl"
+        alt="Card image cap">
+    <img *ngIf="!game.verticalCoverUrl" class="card-img-top cardImg" draggable="false" src="/assets/images/noImage.jpg"
+        alt="Card image cap">
+</div>
