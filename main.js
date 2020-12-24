@@ -10,6 +10,7 @@ function createWindow() {
 		resizable: false,
 		frame: false,
 		transparent: true,
+		icon: __dirname + '/iconplayit.png',
 		webPreferences: {
 			nodeIntegration: true
 		},
