@@ -63,7 +63,7 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
 
   saveGame() {
     this.selectedGame.gamePath = this.gameFilePath;
-    this.selectedGame.addedPrograms = [this.addedProgramPath];
+    this.addedProgramPath ? this.selectedGame.addedPrograms = [this.addedProgramPath] : this.selectedGame.addedPrograms = [];
     this.gamesServ.updateUserGame(this.selectedGame);
     
   }

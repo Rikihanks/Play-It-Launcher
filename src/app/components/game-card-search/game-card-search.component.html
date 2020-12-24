@@ -1,4 +1,4 @@
-<div class="card searchGameCard">
+<div [@inOutAnimation] *ngIf="game" class="card searchGameCard">
     <img *ngIf="game.verticalCoverUrl" class="card-img-top cardImg" draggable="false" [src]="game.verticalCoverUrl" alt="Card image cap">
     <img *ngIf="!game.verticalCoverUrl" class="card-img-top cardImg" draggable="false" src="/assets/images/noImage.jpg" alt="Card image cap">
     <div class="card-body myCardBody">
