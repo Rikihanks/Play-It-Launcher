@@ -13,7 +13,6 @@ export class GameCardSearchComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.game);
     
   }
 

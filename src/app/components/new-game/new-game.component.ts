@@ -1,6 +1,7 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Game } from 'src/app/models/Game';
+import { GamesService } from 'src/app/services/games.service';
 import { IgdbService } from 'src/app/services/igdb.service';
 import { IpcService } from 'src/app/services/ipc.service';
 import { ModalParentComponent } from '../modal-parent/modal-parent.component';
@@ -16,12 +17,15 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
   gameName: string;
   games: Game[];
   gamesCopy: Game[];
-  filePath;
+  addedProgramPath: string;
+  gameFilePath: string;
   selectedGame: Game = null;
 
-  @ViewChild("selectFile") selectFile;
+  @ViewChild("selectGameFile") selectFile;
+  
+  @ViewChild("selectAddedProgramFile") selectAddedProgramFile;
 
-  constructor(private igdb: IgdbService, private ipc: IpcService) {
+  constructor(private igdb: IgdbService, private ipc: IpcService, private gamesServ: GamesService) {
     super();
   }
 
@@ -49,25 +53,31 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
     if(this.games.length == 1 && this.games.includes(game)) {
       this.games = this.gamesCopy;
       this.selectedGame = null;
-      //this.findGame(this.gameName);
     }else {
       this.selectedGame = game;
       this.gamesCopy = this.games;
       this.games = [this.selectedGame];
-      console.log(game);
     }
     
   }
 
-  change($e) {
-    this.ipc.sendOpenFile(this.selectFile.nativeElement.files[0].path)
-    this.filePath = this.selectFile.nativeElement.files[0].path;
+  saveGame() {
+    this.selectedGame.gamePath = this.gameFilePath;
+    this.selectedGame.addedPrograms = [this.addedProgramPath];
+    this.gamesServ.updateUserGame(this.selectedGame);
     
-
   }
 
-  openFilePicker() {
-    document.getElementById('gamepath').click();
+  onGameFileChange() {
+    this.gameFilePath = this.selectFile.nativeElement.files[0].path;
+  }
+
+  onAddedFileChange() {
+    this.addedProgramPath = this.selectAddedProgramFile.nativeElement.files[0].path;
+  }
+
+  openFilePicker(filePickerId: string) {
+    document.getElementById(filePickerId).click();
   }
 
   formatCoverUrl(coverArray: any, coverType: string): string {

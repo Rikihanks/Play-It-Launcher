@@ -2,6 +2,8 @@ export class Game {
     id: number;
     cover: number;
     name: string;
-    verticalCoverUrl?: string;
     horizontalCoverUrl: string;
+    verticalCoverUrl?: string;
+    gamePath?: string;
+    addedPrograms?: string [];
 }

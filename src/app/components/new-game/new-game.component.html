@@ -28,18 +28,46 @@
 
           <div *ngIf="selectedGame" class="row h-100">
             <div class="col-md-12 gamesCol">
-              <input type="file" #selectFile (change)="change($e)" style="display:none" name="gamepath" id="gamepath">
+              <input type="file" #selectGameFile (change)="onGameFileChange()" style="display:none" name="gamepath" id="gamepath">
               <div class="input-group mb-3">
-                <div class="input-group-prepend" (click)="openFilePicker()">
+                <div class="input-group-prepend" (click)="openFilePicker('gamepath')">
                   <span class="input-group-text inputIcon">
                     <i class="fa fa-folder-open" aria-hidden="true"></i>
                     &nbsp;Selecciona la ruta del .exe del juego
                   </span>
                 </div>
-                <input type="text" [(ngModel)]="filePath"
+                <input type="text" [(ngModel)]="gameFilePath"
                   placeholder="Ex: C:\Riot Games\VALORANT\live\VALORANT.exe" class="form-control inputText" readonly="true">
               </div>
 
+            </div>
+
+            <div class="col-md-12 gamesCol" style="border: 1px solid #d3d3d329;
+            border-radius: 10px;
+            box-shadow: 0px 0px 8px 4px #ffffff1f;
+            padding: 10px;">
+              <input type="file" #selectAddedProgramFile (change)="onAddedFileChange()" style="display:none" name="addedProgramPath" id="addedProgramPath">
+              <span class="mb-2">¿Quieres que junto a tu juego se arranque otro programa como <b>Blitz o StreamLabs OBS</b>? 
+                Puedes seleccionarlo aquí y cada vez que inices tu juego desde el launcher se abrirá junto con el programa que selecciones.
+              </span>
+              <br>
+              <div class="input-group mb-1">
+                <div class="input-group-prepend" (click)="openFilePicker('addedProgramPath')">
+                  <span class="input-group-text inputIcon">
+                    <i class="fa fa-folder-open" aria-hidden="true"></i>
+                    &nbsp;Selecciona ejecutable
+                  </span>
+                </div>
+                <input type="text" [(ngModel)]="addedProgramPath"
+                  placeholder="Ex: C:\Users\User\AppData\Local\Programs\Blitz\Blitz.exe" class="form-control inputText" readonly="true">
+              </div>
+              
+              <span style="font-size: small; width: 100%;">Puedes cambiar esta decisión más tarde en el apartado Configuración</span>
+            </div>
+
+            <div class="col-md-12 mt-4">
+              
+              <button class="btn btn-primary" (click)="saveGame()" [disabled]="!gameFilePath">&nbsp; Añadir a la biblioteca &nbsp;</button>
             </div>
           </div>
         </div>

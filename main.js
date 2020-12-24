@@ -1,8 +1,7 @@
 const { app, BrowserWindow, ipcMain, IpcMessageEvent, remote } = require('electron')
-const exec = require('child_process').exec;
+const exec = null;
 
 function createWindow() {
-	app.userAgentFallback = "Chrome";
 	// Create the browser window. 
 	const win = new BrowserWindow({
 		width: 1600,
@@ -12,9 +11,7 @@ function createWindow() {
 		frame: false,
 		transparent: true,
 		webPreferences: {
-			nodeIntegration: true,
-			nativeWindowOpen: true,
-			preload: __dirname + '/preload.js'
+			nodeIntegration: true
 		},
 	})
 	win.removeMenu();
@@ -22,7 +19,7 @@ function createWindow() {
 	// Load the index.html of the app 
 	// From the dist folder which is created 
 	// After running the build command 
-	win.loadFile('dist/RitoLauncher/index.html', { userAgent: 'Chrome' })
+	win.loadFile('dist/RitoLauncher/index.html')
 
 	// Open the DevTools. 
 	win.webContents.openDevTools()
@@ -91,8 +88,10 @@ ipcMain.on('minimize', (event) => {
 
 //minimize
 ipcMain.on('openFile', (event, path) => {
-	console.log('hola');
-	console.log(path)
+	if (exec == null) {
+		exec = require('child_process').exec;
+	}
+
 	exec("%SystemRoot%\\explorer.exe \"" + path + "\"", (error, stdout, stderr) => {
 		// Callback will be called when process exits..
 		if (error) {
