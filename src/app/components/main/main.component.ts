@@ -16,48 +16,52 @@ import { GamesService } from 'src/app/services/games.service';
   styleUrls: ['./main.component.less'],
   animations: [ProfilePicAnim]
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit {
 
   games: Game[];
   private user: User;
-  private subscription: Subscription;
+  private subscription: Subscription = new Subscription();
+  private gamesSubscription: Subscription = new Subscription();
 
   constructor(public auth: AuthService, public ipc: IpcService, public gamesService: GamesService) { }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
   async ngOnInit(): Promise<void> {
-     this.subscription = this.auth.user$.subscribe(u => {
+    this.subscription.add(this.auth.user$.subscribe(u => {
       this.user = u;
-    })
+      if(this.user != null) {
+         this.subscribeToGames();
+      }
+    }));
 
-    
-    this.gamesService.games.subscribe(games => {
-      this.games = games;
-    })
-    
-   
+
+
 
     /**/
-    
+
+  }
+
+  subscribeToGames() {
+    this.gamesSubscription.add(
+      this.gamesService.games.subscribe(games => {
+        this.games = games;
+      }));
   }
 
   canShowLogoutButton() {
-   return this.user != null;
+    return this.user != null;
   }
 
   logoutAndClean() {
+    this.gamesService.games.next([]);
     this.auth.signOut()
+    this.gamesSubscription.unsubscribe();
+    this.gamesSubscription = new Subscription();
     //todo pending
-    setTimeout(() => {
-      this.gamesService.games.next([]);
-    }, 500);
   }
 
-  
+
 
 }
- 
+
 

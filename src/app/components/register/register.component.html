@@ -2,7 +2,7 @@
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" data-bs-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-body" style="color: whitesmoke; text-align: center; background-color: #2f2c49;">
+        <div class="modal-body registerModalBody">
           <div class="container">
             <div class="row h-100">
               <div class="col-md-12 modalHeader" style="text-align: center;">
@@ -48,7 +48,7 @@
                 <small *ngIf="emailAlredyRegistered" class="errorMsg">Este Email ya está registrado</small>
 
                 <div class="col-md-12">
-                    <button class="btn btn-primary" (click)="register()">Registrarse</button>
+                    <button class="btn btn-jugar" (click)="register()">Registrarse</button>
                     <br>
                     <a (click)="cancel()" class="cancelBtn">Cancelar</a>
                 </div>
