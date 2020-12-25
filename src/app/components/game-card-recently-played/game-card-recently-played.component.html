@@ -1,4 +1,4 @@
-<div [@inOutAnimation] *ngIf="game" class="card searchGameCard">
+<div [@inOutAnimation] *ngIf="game" class="card searchGameCard" (click)="sendIpcPlay()">
     <div class="centered">
         <span> <b> {{game.name | titlecase }}</b>
         <br>
