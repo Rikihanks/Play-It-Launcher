@@ -29,6 +29,7 @@
                             <img [@inOutAnimation] [src]="user.photoURL" class="roundedPfImg">
                             <h3>{{ user.displayName }}</h3>
                             <p>{{ user.email }}</p>
+                            <p style="border: 2px solid; border-radius: 5px; padding: 5px; box-shadow: 0 0 7px 1px white;"><i class="fas fa-play-circle fa-rotate-270" style="color: #57a136;"></i> <span> League of legends</span></p>
                         </div>
                     </ng-template>
 
@@ -52,7 +53,7 @@
             </div>
             <div class="row h-30 border border-light">
                 <div class="col">
-                    <div style="width: 100%; text-align: center;"><span>Recently Played</span></div>
+                    <div style="width: 100%; text-align: center;"><span>Recientes</span></div>
                     <div *ngFor="let game of filteredGames | slice:0:3" >
                         <app-game-card-recently-played [game]="game"></app-game-card-recently-played>
                     </div>
