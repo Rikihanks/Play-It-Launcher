@@ -22,6 +22,7 @@ import { GameCardSearchComponent } from './components/game-card-search/game-card
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GameCardMainComponent } from './components/game-card-main/game-card-main.component';
+import { GameCardRecentlyPlayedComponent } from './components/game-card-recently-played/game-card-recently-played.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { GameCardMainComponent } from './components/game-card-main/game-card-mai
     ModalParentComponent,
     NewGameComponent,
     GameCardSearchComponent,
-    GameCardMainComponent
+    GameCardMainComponent,
+    GameCardRecentlyPlayedComponent
   ],
   imports: [
     BrowserModule,

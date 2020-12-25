@@ -1,0 +1,11 @@
+<div [@inOutAnimation] *ngIf="game" class="card searchGameCard">
+    <div class="centered">
+        <span> <b> {{game.name | titlecase }}</b>
+        <br>
+    </span>
+    </div>
+    <img *ngIf="game.horizontalCoverUrl" class="card-img-top cardImg" draggable="false" [src]="game.horizontalCoverUrl"
+        alt="Card image cap">
+    <img *ngIf="!game.verticalCoverUrl" class="card-img-top cardImg" draggable="false" src="/assets/images/noImage.jpg"
+        alt="Card image cap">
+</div>
