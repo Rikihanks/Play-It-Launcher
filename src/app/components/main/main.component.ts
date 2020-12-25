@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { IgdbService } from 'src/app/services/igdb.service';
@@ -9,6 +9,7 @@ import { Game } from 'src/app/models/Game';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ProfilePicAnim } from 'src/app/animations/ProfilePicAnim';
 import { GamesService } from 'src/app/services/games.service';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -17,9 +18,12 @@ import { GamesService } from 'src/app/services/games.service';
   animations: [ProfilePicAnim]
 })
 export class MainComponent implements OnInit {
+  
 
   games: Game[];
   private user: User;
+   // your current result based on filters input
+  filteredGames: Game[];
   private subscription: Subscription = new Subscription();
   private gamesSubscription: Subscription = new Subscription();
 
@@ -37,14 +41,33 @@ export class MainComponent implements OnInit {
 
 
 
+
     /**/
 
+  }
+
+  onSearchChange(e) {
+    if(e == "" || e == undefined || e == null) {
+      this.filteredGames = this.games;
+      return;
+    }
+    
+    this.filteredGames = this._filter(e);
+    
+  }
+
+
+  private _filter(value): Game[] {
+    const filterValue = value.toLowerCase();
+
+    return this.filteredGames.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   subscribeToGames() {
     this.gamesSubscription.add(
       this.gamesService.games.subscribe(games => {
         this.games = games;
+        this.filteredGames = games;
       }));
   }
 
@@ -53,11 +76,11 @@ export class MainComponent implements OnInit {
   }
 
   logoutAndClean() {
+    //i dont know why, but logging out triggers the games subscription so i have to clean it
     this.gamesService.games.next([]);
     this.auth.signOut()
     this.gamesSubscription.unsubscribe();
     this.gamesSubscription = new Subscription();
-    //todo pending
   }
 
 

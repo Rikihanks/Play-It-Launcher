@@ -86,7 +86,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text inputIcon"><i class="fa fa-search" aria-hidden="true"></i></span>
                         </div>
-                        <input type="text" class="form-control inputText" placeholder="Búsqueda...">
+                        <input (input)="onSearchChange($event.target.value)" type="text" class="form-control inputText" placeholder="Búsqueda...">
                         <button class="btn btn-jugar" data-bs-toggle="modal" data-bs-target="#newGameModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </div>
                 </div>
@@ -103,7 +103,7 @@
                     flex-flow: wrap;
                     justify-content: flex-start;;
                 ">
-                     <div *ngFor="let game of games"  >
+                     <div *ngFor="let game of filteredGames"  >
                          <app-game-card-main [game]="game"></app-game-card-main>
                      </div>
                 </div>
