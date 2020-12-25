@@ -17,6 +17,13 @@ export class IpcService {
     }
   }
 
+  public on(channel: string, listener: any): void {
+    if (!this.ipcRenderer) {
+      return;
+    }
+    this.ipcRenderer.on(channel, listener);
+  }
+
   sendClose() {
     this.ipcRenderer.send('close');
   }

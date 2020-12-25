@@ -8,9 +8,9 @@
         <br>
         <br>
 
-        <button class="btn btn-jugar">&nbsp;Play it &nbsp;</button>
+        <button class="btn btn-jugar" (click)="sendIpcPlay()">&nbsp;Play it &nbsp;</button>
         <span>&nbsp;&nbsp;</span>
-        <button class="btn btn-jugar">&nbsp;&nbsp;&nbsp;Info&nbsp;&nbsp;&nbsp;</button>
+        <button class="btn btn-jugar" (click)="moreInfo()">&nbsp;&nbsp;&nbsp;Info&nbsp;&nbsp;&nbsp;</button>
     </span>
     </div>
     <img *ngIf="game.horizontalCoverUrl" class="card-img-top cardImg" draggable="false" [src]="game.horizontalCoverUrl"

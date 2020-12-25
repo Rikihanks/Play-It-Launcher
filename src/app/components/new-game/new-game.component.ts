@@ -37,6 +37,8 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
       return;
     }
 
+    this.selectedGame = null;
+
     let games = await this.igdb.findGame(name).toPromise();
 
     games.forEach(async game => {
@@ -50,15 +52,9 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
   }
 
   selectGame(game) {
-    if(this.games.length == 1 && this.games.includes(game)) {
-      this.games = this.gamesCopy;
-      this.selectedGame = null;
-    }else {
       this.selectedGame = game;
       this.gamesCopy = this.games;
       this.games = [this.selectedGame];
-    }
-    
   }
 
   saveGame() {

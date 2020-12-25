@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, IpcMessageEvent, remote } = require('electron')
-const exec = null;
+let exec = null;
 
 function createWindow() {
 	// Create the browser window. 
@@ -89,7 +89,7 @@ ipcMain.on('minimize', (event) => {
 
 //minimize
 ipcMain.on('openFile', (event, path) => {
-	if (exec == null) {
+	/*if (exec == null) {
 		exec = require('child_process').exec;
 	}
 
@@ -101,6 +101,21 @@ ipcMain.on('openFile', (event, path) => {
 			console.log(`stdout:`, stdout);
 			console.log(`stderr:`, stderr);
 		}
+	});*/
+
+
+
+	var child = require('child_process').execFile;
+	var executablePath = path;
+
+	child(executablePath, function (err, data) {
+		if (err) {
+			console.error(err);
+			return;
+		}
+
+		console.log(data.toString());
+		
+		event.sender.send('success', 'success');
 	});
-	//BrowserWindow.getFocusedWindow().minimize();
 });
