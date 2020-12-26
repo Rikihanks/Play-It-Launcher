@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain, IpcMessageEvent, remote } = require('electron')
 let exec = null;
 
-function createWindow() {
+ function createWindow() {
 	// Create the browser window. 
 	const win = new BrowserWindow({
 		width: 1600,
@@ -25,20 +25,17 @@ function createWindow() {
 	// Open the DevTools. 
 	win.webContents.openDevTools()
 
+	/*var readStream = fs.readFileSync('C:\\Program Files (x86)\\Steam\\appcache\\appinfo.vdf');
+	const shortcuts = readVdf(readStream);
+	console.log(shortcuts); // output below;*/
 
-	/*
 
-	let child_process_obj = exec('"C:\\Riot Games\\League of Legends\\LeagueClient.exe"', (error, stdout, stderr) => {
-		// Callback will be called when process exits..
-		if (error) {
-			console.error(`An error occurred: `, error);
-		} else {
-			console.log(`stdout:`, stdout);
-			console.log(`stderr:`, stderr);
-		}
-	});
+		/*var data = fs.readFileSync('C:\\Program Files (x86)\\Steam\\appcache\\appinfo.vdf', 'utf8');
 
-	console.log(`Launched child process: PID: ${JSON.stringify(child_process_obj)}`);*/
+		console.log(data.toString());
+		var parsed = VDF.parse(data.toString());
+		console.log(parsed);    */
+	 
 }
 
 

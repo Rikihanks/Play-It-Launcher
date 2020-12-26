@@ -27,13 +27,13 @@
           </div>
 
           <div *ngIf="selectedGame" class="row h-100">
-            <div class="col-md-12 gamesCol">
+            <div class="col-md-6 gamesCol">
               <input type="file" #selectGameFile (change)="onGameFileChange()" style="display:none" name="gamepath" id="gamepath">
               <div class="input-group mb-3">
                 <div class="input-group-prepend" (click)="openFilePicker('gamepath')">
                   <span class="input-group-text inputIcon">
                     <i class="fa fa-folder-open" aria-hidden="true"></i>
-                    &nbsp;Selecciona la ruta del .exe del juego
+                    &nbsp;Ruta del .exe / ROM del juego
                   </span>
                 </div>
                 <input type="text" [(ngModel)]="gameFilePath"
@@ -41,6 +41,20 @@
               </div>
 
             </div>
+
+            <div class="col-md-3 gamesCol">
+              <select (change)="platformSelectChange($event.target.value)" class="form-select platformSelect">
+                <option selected value="">Platform</option>
+                <option *ngFor="let category of getUnRepeatedCategories()" [value]="category">{{category}}</option>
+                <option value="other">Other (specify)</option>
+              </select>
+            </div>
+
+            <div *ngIf="canShowInputPlatform()" class="col-md-3 gamesCol">
+              <input type="text" style="margin-bottom: 15px;" (change)="platformInputChange($event.target.value)" placeholder="Ex: Nintendo64" class="form-control inputText">
+            </div>
+
+
 
             <div class="col-md-12 gamesCol" style="border: 1px solid #d3d3d329;
             border-radius: 10px;

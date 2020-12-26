@@ -4,6 +4,7 @@ export class Game {
     name: string;
     horizontalCoverUrl: string;
     summary: string;
+    category: string;
     verticalCoverUrl?: string;
     gamePath?: string;
     addedPrograms?: string [];

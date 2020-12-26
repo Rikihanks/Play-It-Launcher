@@ -13,8 +13,10 @@ import { ModalParentComponent } from '../modal-parent/modal-parent.component';
 })
 export class NewGameComponent extends ModalParentComponent implements OnInit {
 
-  
+  showInputPlatform: boolean;
+  userGames: Game[];
   gameName: string;
+  gamePlatform: string = "Platform";
   games: Game[];
   gamesCopy: Game[];
   addedProgramPath: string;
@@ -30,6 +32,12 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.gamesServ.games.subscribe(games => {
+      this.userGames = games;
+      
+    });
+
   }
 
   async findGame(name: string) {
@@ -51,6 +59,37 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
     
   }
 
+  getUnRepeatedCategories() {
+    let categories = [];
+    this.userGames.forEach(game => {
+      if(!categories.includes(game.category)) {
+        categories.push(game.category);
+      }
+    })
+    return categories;
+  }
+
+  canShowInputPlatform() {
+    return this.showInputPlatform;
+  }
+
+  platformSelectChange(value) {
+    if(value == "other") {
+      this.showInputPlatform = true;
+      console.log('si');
+      
+    }else {
+      this.showInputPlatform = false;
+      console.log('no');
+      
+    }
+    this.gamePlatform = value;
+  }
+
+  platformInputChange(value) {
+    this.gamePlatform = value;
+  }
+
   selectGame(game) {
       this.selectedGame = game;
       this.gamesCopy = this.games;
@@ -59,8 +98,12 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
 
   saveGame() {
     this.selectedGame.gamePath = this.gameFilePath;
+    this.selectedGame.category = this.gamePlatform;
     this.addedProgramPath ? this.selectedGame.addedPrograms = [this.addedProgramPath] : this.selectedGame.addedPrograms = [];
-    this.gamesServ.updateUserGame(this.selectedGame);
+    
+    this.gamesServ.updateUserGame(this.selectedGame).then(
+      super.getSelfReference('newGameModal').hide()
+    );
     
   }
 

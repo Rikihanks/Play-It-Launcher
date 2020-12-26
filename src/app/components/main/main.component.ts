@@ -52,15 +52,40 @@ export class MainComponent implements OnInit {
       return;
     }
     
-    this.filteredGames = this._filter(e);
+    this.filteredGames = this._filterByName(e);
     
   }
 
+  getUnRepeatedCategories() {
+    let categories = [];
+    this.games.forEach(game => {
+      if(!categories.includes(game.category)) {
+        categories.push(game.category);
+      }
+    })
+    return categories;
+  }
 
-  private _filter(value): Game[] {
+  platformSelectChanged(value) {
+    console.log(value);
+    if(value == "") {
+      this.filteredGames = this.games;
+    }else {
+      this.filteredGames = this.filterByCategory(value)
+    }
+  }
+
+
+  private _filterByName(value): Game[] {
     const filterValue = value.toLowerCase();
 
-    return this.filteredGames.filter(option => option.name.toLowerCase().includes(filterValue));
+    return this.games.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
+
+  private filterByCategory(value): Game[] {
+    const filterValue = value.toLowerCase();
+
+    return this.games.filter(option => option.category.toLowerCase().includes(filterValue));
   }
 
   subscribeToGames() {
@@ -68,6 +93,7 @@ export class MainComponent implements OnInit {
       this.gamesService.games.subscribe(games => {
         this.games = games;
         this.filteredGames = games;
+        
       }));
   }
 
