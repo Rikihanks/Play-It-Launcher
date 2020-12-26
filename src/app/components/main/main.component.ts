@@ -97,6 +97,12 @@ export class MainComponent implements OnInit {
       }));
   }
 
+
+  getRecentlyPlayedGames() {
+    let recentGames = JSON.parse(localStorage.getItem('recentGames')) as Game[] ;
+    return recentGames || [];
+  }
+
   canShowLogoutButton() {
     return this.user != null;
   }

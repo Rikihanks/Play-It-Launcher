@@ -28,6 +28,7 @@ export class GameCardMainComponent implements OnInit {
   }
 
   sendIpcPlay() {
+    
     this.loader.startLoader();
 
     if (this.game.addedPrograms.length > 0) {
@@ -37,10 +38,34 @@ export class GameCardMainComponent implements OnInit {
     }
 
     this.ipc.sendOpenFile(this.game.gamePath);
+    
+    this.updateRecentPlayedGames();
+   /* let windowd = window.open('steam://rungameid/739630', "_blank");
+    windowd.close();
+*/
   }
 
   moreInfo() {
 
+  }
+
+  updateRecentPlayedGames() {
+    
+    console.log(this.game);
+    let recentGames = JSON.parse(localStorage.getItem('recentGames')) as Game[] ;
+    if(recentGames == null || recentGames == undefined) {
+      localStorage.setItem('recentGames', JSON.stringify([this.game]))
+    }else {
+      if(recentGames.length < 3) {
+        recentGames.push(this.game)
+        localStorage.setItem('recentGames', JSON.stringify(recentGames))
+      }else {
+        recentGames = recentGames.reverse();
+        recentGames.pop();
+        recentGames.push(this.game)
+        localStorage.setItem('recentGames', JSON.stringify(recentGames))
+      }
+    }
   }
 
 }

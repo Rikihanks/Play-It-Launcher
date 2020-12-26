@@ -54,7 +54,7 @@
             <div class="row h-30 border border-light">
                 <div class="col">
                     <div style="width: 100%; text-align: center;"><span>Recientes</span></div>
-                    <div *ngFor="let game of filteredGames | slice:0:3" >
+                    <div *ngFor="let game of getRecentlyPlayedGames()" >
                         <app-game-card-recently-played [game]="game"></app-game-card-recently-played>
                     </div>
                 </div>
