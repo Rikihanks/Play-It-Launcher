@@ -13,6 +13,7 @@ import { ModalParentComponent } from '../modal-parent/modal-parent.component';
 })
 export class NewGameComponent extends ModalParentComponent implements OnInit {
 
+  juegoDeSteam: boolean = false;
   showInputPlatform: boolean;
   userGames: Game[];
   gameName: string;
@@ -73,6 +74,10 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
     return this.showInputPlatform;
   }
 
+  canEnableAddButton() {
+    return this.gameFilePath || this.juegoDeSteam;
+  }
+
   platformSelectChange(value) {
     if(value == "other") {
       this.showInputPlatform = true;
@@ -101,9 +106,9 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
     this.selectedGame.category = this.gamePlatform;
     this.addedProgramPath ? this.selectedGame.addedPrograms = [this.addedProgramPath] : this.selectedGame.addedPrograms = [];
     
-    this.gamesServ.updateUserGame(this.selectedGame).then(
+    /*this.gamesServ.updateUserGame(this.selectedGame).then(
       super.getSelfReference('newGameModal').hide()
-    );
+    );*/
     
   }
 

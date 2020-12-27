@@ -1,7 +1,9 @@
 const { app, BrowserWindow, ipcMain, IpcMessageEvent, remote } = require('electron')
 let exec = null;
+let ids = [];
+const VDF = require('vdf-parser');
 
- function createWindow() {
+function createWindow() {
 	// Create the browser window. 
 	const win = new BrowserWindow({
 		width: 1600,
@@ -31,12 +33,53 @@ let exec = null;
 	console.log(shortcuts); // output below;*/
 
 
-		/*var data = fs.readFileSync('C:\\Program Files (x86)\\Steam\\appcache\\appinfo.vdf', 'utf8');
 
-		console.log(data.toString());
-		var parsed = VDF.parse(data.toString());
-		console.log(parsed);    */
-	 
+}
+
+
+function getSteamAppIdsFromInstallDirectory(steamDir) {
+	let instDirectory = steamDir + "\\steamapps";
+	const fs = require('fs');
+
+	addGameIds(fs, instDirectory);
+
+	let libraries = checkIfMultipleLibraries(instDirectory, fs);
+
+
+	if(libraries.length > 0) {
+		libraries.forEach(library => {
+			addGameIds(fs, library.replace("\\\\", "\\").concat("\\steamapps"))
+		})
+	}
+
+	ids.forEach(id => console.log('id: ', id + " \n"))
+}
+
+function addGameIds(fs, instDirectory) {
+	console.log(instDirectory);
+	fs.readdirSync(instDirectory).forEach(file => {
+		if (file.startsWith("appmanifest_")) {
+			var matches = file.match(/(\d+)/);
+			if (matches) {
+				ids.push(matches[0]);
+			}
+		}
+	});
+}
+
+function checkIfMultipleLibraries(instDirectory, fs) {
+	libraries = [];
+	var data = fs.readFileSync(instDirectory+'\\libraryfolders.vdf', 'utf8');
+
+	var parsed = VDF.parse(data.toString(), true);
+
+	for (var [key, value] of Object.entries(parsed.LibraryFolders)) {
+		if (key != "TimeNextStatsReport" && key != "ContentStatsID") {
+			libraries.push(value)
+		}
+	}
+
+	return libraries;
 }
 
 
@@ -85,23 +128,8 @@ ipcMain.on('minimize', (event) => {
 	BrowserWindow.getFocusedWindow().minimize();
 });
 
-//minimize
+//openfile
 ipcMain.on('openFile', (event, path) => {
-	/*if (exec == null) {
-		exec = require('child_process').exec;
-	}
-
-	exec("%SystemRoot%\\explorer.exe \"" + path + "\"", (error, stdout, stderr) => {
-		// Callback will be called when process exits..
-		if (error) {
-			console.error(`An error occurred: `, error);
-		} else {
-			console.log(`stdout:`, stdout);
-			console.log(`stderr:`, stderr);
-		}
-	});*/
-
-
 
 	var child = require('child_process').execFile;
 	var executablePath = path;
@@ -113,7 +141,18 @@ ipcMain.on('openFile', (event, path) => {
 		}
 
 		console.log(data.toString());
-		
+
 		event.sender.send('success', 'success');
 	});
 });
+
+ipcMain.on('addSteamGames', (event, path) => {
+
+	getSteamAppIdsFromInstallDirectory(path);
+
+	ids.splice(ids.indexOf('228980'), 1);
+
+	event.sender.send('steamAppIds', ids);
+});
+
+

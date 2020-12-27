@@ -13,7 +13,7 @@ export class IgdbService {
   constructor(private http: HttpClient) { }
 
   findGame(gameName: string): Observable<Game[]> {
-    return this.http.post(this.baseUrl + "games", "fields name, cover, summary; search \"" + gameName + "\";",
+    return this.http.post(this.baseUrl + "games", "fields name, cover;  where name ~\""+ gameName+"\"*;",
     ) as Observable<Game[]>;
   }
 

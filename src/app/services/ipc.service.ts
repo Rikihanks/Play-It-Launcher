@@ -35,4 +35,8 @@ export class IpcService {
   sendOpenFile(path: string) {
     this.ipcRenderer.send('openFile', path);
   }
+
+  sendAddSteamGamess(path: string) {
+    this.ipcRenderer.send('addSteamGames', path);
+  }
 }

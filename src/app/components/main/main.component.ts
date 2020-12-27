@@ -35,15 +35,21 @@ export class MainComponent implements OnInit {
       this.user = u;
       if(this.user != null) {
          this.subscribeToGames();
+         this.checkImportSteamGames();
       }
     }));
 
+    
 
+  }
 
-
-
-    /**/
-
+  checkImportSteamGames() {
+    //@ts-ignore
+    let modal = new bootstrap.Modal(document.getElementById('steamImportModal'), {
+      keyboard: false
+    })
+    modal.show();
+    
   }
 
   onSearchChange(e) {

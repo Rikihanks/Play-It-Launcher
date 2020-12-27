@@ -1,0 +1,28 @@
+
+<!-- Modal -->
+<div class="modal fade" id="steamImportModal" tabindex="-1" aria-labelledby="steamImportModalLabel"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body loginModalBody">
+          <div class="container">
+              <div class="row h-100">
+                  <div class="col-md-12 mb-3" style="text-align: center;">
+                    <span>¿Importar automáticamente los juegos instalados de STEAM?</span>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="steamInstallationPath">Steam installation path </label>
+                    <input class="basicInput" style="width: 70%;" type="text" [(ngModel)]="path"
+                    name="steamInstallationPath" id="steamInstallationPath" placeholder="C:\Program Files (x86)\Steam">
+                  </div>
+                  <div class="col-md-6">
+                    <button class="btn btn-jugar" (click)="importarJuegosSteam()" style="width: 90%;">Sí</button>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="btn btn-jugar" data-bs-dismiss="modal" style="width: 90%;">No</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

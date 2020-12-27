@@ -27,7 +27,17 @@
           </div>
 
           <div *ngIf="selectedGame" class="row h-100">
-            <div class="col-md-6 gamesCol">
+
+            <div class="col-md-12 gamesCol">
+              <div class="form-check">
+                <input [(ngModel)]="juegoDeSteam" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  <strong>Marcar checkbox si este juego es de STEAM</strong>
+                </label>
+              </div>
+            </div>
+
+            <div *ngIf="!juegoDeSteam" class="col-md-6 gamesCol">
               <input type="file" #selectGameFile (change)="onGameFileChange()" style="display:none" name="gamepath" id="gamepath">
               <div class="input-group mb-3">
                 <div class="input-group-prepend" (click)="openFilePicker('gamepath')">
@@ -42,7 +52,7 @@
 
             </div>
 
-            <div class="col-md-3 gamesCol">
+            <div class="col gamesCol">
               <select (change)="platformSelectChange($event.target.value)" class="form-select platformSelect">
                 <option selected value="">Platform</option>
                 <option *ngFor="let category of getUnRepeatedCategories()" [value]="category">{{category}}</option>
@@ -81,7 +91,7 @@
 
             <div class="col-md-12 mt-4">
               
-              <button class="btn btn-jugar" (click)="saveGame()" [disabled]="!gameFilePath">&nbsp; Añadir a la biblioteca &nbsp;</button>
+              <button class="btn btn-jugar" (click)="saveGame()" [disabled]="!canEnableAddButton()">&nbsp; Añadir a la biblioteca &nbsp;</button>
             </div>
           </div>
         </div>

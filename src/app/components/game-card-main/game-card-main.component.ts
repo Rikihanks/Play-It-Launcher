@@ -31,18 +31,24 @@ export class GameCardMainComponent implements OnInit {
     
     this.loader.startLoader();
 
-    if (this.game.addedPrograms.length > 0) {
+    if (this.game.addedPrograms && this.game.addedPrograms.length > 0) {
       this.game.addedPrograms.map(program => {
         this.ipc.sendOpenFile(program);
       })
     }
 
-    this.ipc.sendOpenFile(this.game.gamePath);
+    if(this.game.category == "STEAM") {
+      let windowd = window.open('steam://rungameid/'+this.game.id, "_blank");
+      windowd.close()
+    }else {
+      this.ipc.sendOpenFile(this.game.gamePath);
+    }
+
     
+    
+    this.loader.stopLoader();
+
     this.updateRecentPlayedGames();
-   /* let windowd = window.open('steam://rungameid/739630', "_blank");
-    windowd.close();
-*/
   }
 
   moreInfo() {
