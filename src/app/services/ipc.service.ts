@@ -32,8 +32,8 @@ export class IpcService {
     this.ipcRenderer.send('minimize');
   }
 
-  sendOpenFile(path: string) {
-    this.ipcRenderer.send('openFile', path);
+  sendOpenFile(path: string, args?: string []) {
+    this.ipcRenderer.send('openFile', path, args);
   }
 
   sendAddSteamGamess(path: string) {

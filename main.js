@@ -129,12 +129,12 @@ ipcMain.on('minimize', (event) => {
 });
 
 //openfile
-ipcMain.on('openFile', (event, path) => {
+ipcMain.on('openFile', (event, path, arguments) => {
 
 	var child = require('child_process').execFile;
 	var executablePath = path;
 
-	child(executablePath, function (err, data) {
+	child(executablePath, [arguments],  function (err, data) {
 		if (err) {
 			console.error(err);
 			return;

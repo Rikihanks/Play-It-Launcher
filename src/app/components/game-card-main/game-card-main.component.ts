@@ -25,6 +25,7 @@ export class GameCardMainComponent implements OnInit {
     });
 
 
+    
   }
 
   sendIpcPlay() {
@@ -49,6 +50,19 @@ export class GameCardMainComponent implements OnInit {
     this.loader.stopLoader();
 
     this.updateRecentPlayedGames();
+
+    /*
+    child('C:\\Riot Games\\Riot Client\\RiotClientServices.exe', ['--launch-product=valorant','--launch-patchline=live'],  function (err, data) {
+		if (err) {
+			console.error(err);
+			return;
+		}
+
+		console.log(data.toString());
+
+		event.sender.send('success', 'success');
+	});    
+    */ 
   }
 
   moreInfo() {
@@ -62,7 +76,7 @@ export class GameCardMainComponent implements OnInit {
     if(recentGames == null || recentGames == undefined) {
       localStorage.setItem('recentGames', JSON.stringify([this.game]))
     }else {
-      if(recentGames.length < 3) {
+      if(recentGames.length < 3 && !recentGames.includes(this.game)) {
         recentGames.push(this.game)
         localStorage.setItem('recentGames', JSON.stringify(recentGames))
       }else {

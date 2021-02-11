@@ -6,10 +6,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "electron": "ng build && electron ."
+    "electron": "ng build && electron .",
+    "package": "electron-packager . electron-app --overwrite --asar=true --platform=win32"
   },
   "private": true,
   "dependencies": {

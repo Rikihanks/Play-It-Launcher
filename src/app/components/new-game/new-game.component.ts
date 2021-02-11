@@ -106,9 +106,9 @@ export class NewGameComponent extends ModalParentComponent implements OnInit {
     this.selectedGame.category = this.gamePlatform;
     this.addedProgramPath ? this.selectedGame.addedPrograms = [this.addedProgramPath] : this.selectedGame.addedPrograms = [];
     
-    /*this.gamesServ.updateUserGame(this.selectedGame).then(
+    this.gamesServ.updateUserGame(this.selectedGame).then(
       super.getSelfReference('newGameModal').hide()
-    );*/
+    );
     
   }
 
